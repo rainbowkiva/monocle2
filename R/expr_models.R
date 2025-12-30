@@ -149,7 +149,7 @@ fitModel <- function(cds,
 responseMatrix <- function(models, newdata = NULL, response_type="response", cores = 1) {
     res_list <- mclapply(models, function(x) {
       if (is.null(x)) { NA } else {
-          if (x@family@vfamily %in% c("negbinomial", "negbinomial.size")) {
+          if (any(x@family@vfamily %in% c("negbinomial", "negbinomial.size"))) {
               predict(x, newdata = newdata, type = response_type)
           } else if (x@family@vfamily %in% c("uninormal")) {
               predict(x, newdata = newdata, type = response_type)
